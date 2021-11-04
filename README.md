@@ -11,5 +11,7 @@ disable docker buildkit
 }
 
 
+
 docker build --tag mindboard.com/fhir-api-poc .
+
 docker run --publish 1500:1500 mindboard.com/fhir-api-poc:latest
