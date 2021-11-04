@@ -25,6 +25,6 @@ docker run --publish 1500:1500 mindboard.com/fhir-api-poc:latest
 
 ### Test
 
-curl -F 'payload=@test/in.xml' http://127.0.0.1:8080/hl72fhir
+curl -F 'payload=@test/in.xml' http://localhost:1500/hl72fhir
 
 
