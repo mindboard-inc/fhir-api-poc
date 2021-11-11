@@ -120,20 +120,8 @@ func NewComposition() *Composition {
 
 	comp.Subject = patientref
 
-	// Author: Default Author
+	// Author: No Default Author
 	authors := make([]d.Reference, 0)
-	author := NewOrganization()
-	var ref string
-	var authorid string
-	var refstr d.String
-
-	authorid = string(*author.ID)
-	ref = author.ResourceType + "/" + string(authorid)
-	refstr = d.String(ref)
-	authorref := &d.Reference {}
-	authorref.Reference = &refstr
-	authors = append(authors, *authorref)
-
 	comp.Author = authors
 
 	// Non Mandatory Attributes
@@ -177,6 +165,36 @@ func SetCompositionEncounter(comp *Composition, enc *Encounter) error {
 	return nil
 }
 
+func SetCompositionAuthorOrganization(comp *Composition, org *Organization) error {
+	var author *Organization
+
+	if (comp == nil) {
+		return errors.New("Unable to add author/organization.")
+	}
+	if (org == nil) {
+		author = NewOrganization()
+	} else {
+		author = org
+	}
+	var ref string
+	var authorid string
+	var refstr d.String
+
+	authorid = string(*author.ID)
+	ref = author.ResourceType + "/" + string(authorid)
+	refstr = d.String(ref)
+	authorref := &d.Reference {}
+	authorref.Reference = &refstr
+
+	comp.Author = append(comp.Author, *authorref)
+
+	// make sure the model is updated
+	if err:= m.UpdateModelEntry("Organization", *author.ID, author); err != nil {
+			return err
+	}
+	
+	return nil
+}
 
 
 
