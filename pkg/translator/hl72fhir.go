@@ -219,7 +219,7 @@ func MappedOrganization(hl7cd h.ClinicalDocument) *r.Organization {
 
 	var country d.String 
 	country = d.String(hl7cd.Author.AssignedAuthor.Addr.Country)
-	address.City = &country
+	address.Country = &country
 
 	org.Address = append(org.Address , *address)
 
