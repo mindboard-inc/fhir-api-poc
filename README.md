@@ -1,10 +1,10 @@
 # Hl7 v3 to Fhir v4 Clinical Document Object Mapping POC
 
-Extends Golang structs as defined in  https://goreportcard.com/badge/github.com/monarko/fhirgo to include ClinicalDocument and Composition objects.
+Extends Golang structs as defined in  https://goreportcard.com/badge/github.com/monarko/fhirgo to include ClinicalDocument profile, and Organization and Composition resources.
 
 Implements mapping per Fhir v4 specifications http://hl7.org/fhir/composition-mappings.html
 
-This code base is heavily under construction. Current version is the baseline with Compositional level mappings with ClinicalDocument Bundle containing required Subject: Patient, Author: Organization and Encounter 
+This code base is heavily under construction. Current version is the baseline with mappings implemented for Compositional and Provider [Organization] as Author inside the ClinicalDocument Bundle with the required Subject: Patient and Encounter references and place holders.
 
 ### Build & Run
 
@@ -26,17 +26,3 @@ This code base is heavily under construction. Current version is the baseline wi
 
 `curl -F 'payload=@test/in.xml' http://localhost:1500/hl72fhir`
 
-
-## Docker Build and Testing Tips
-
-Note for in WSL2 Desktop Integration: Disable docker buildkit  under engine config prior to image build:
-
-```
-{
-“features”: {
-“buildkit”: false
-},
-“experimental”: false
-}
-```
-*per https://forums.docker.com/t/strange-docker-output-or-help-me-please-im-very-noob/100788*
